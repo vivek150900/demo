@@ -17,11 +17,11 @@ public class UserRole {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)   // FIXED
+    @JoinColumn(name = "user_id", nullable = false)   
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)   // FIXED
+    @JoinColumn(name = "role_id", nullable = false)  
     private Role role;
 
 	public Long getId() {
