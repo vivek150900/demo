@@ -20,7 +20,7 @@ public class DataInitializer {
 
         return args -> {
 
-            // ---------- USERS ----------
+            // User
             User admin = userRepository.findByUsername("admin")
                     .orElseGet(() -> {
                         User u = new User();
@@ -37,7 +37,7 @@ public class DataInitializer {
                         return userRepository.save(u);
                     });
 
-            // ---------- ROLES ----------
+            // Role
             Role adminRole = roleRepository.findByName("ADMIN")
                     .orElseGet(() -> {
                         Role r = new Role();
@@ -52,7 +52,7 @@ public class DataInitializer {
                         return roleRepository.save(r);
                     });
 
-            // ---------- PERMISSIONS ----------
+            // permission
             Permission createRole =
                     createPermission(permissionRepository, "CREATE_ROLE");
 
@@ -68,7 +68,7 @@ public class DataInitializer {
             Permission assignPermission =
                     createPermission(permissionRepository, "ASSIGN_PERMISSION");
 
-            // ---------- ROLE → PERMISSIONS ----------
+            // RolePemission
             assignPermission(rolePermissionRepository, adminRole, createRole);
             assignPermission(rolePermissionRepository, adminRole, createPermission);
             assignPermission(rolePermissionRepository, adminRole, assignRole);
@@ -77,13 +77,13 @@ public class DataInitializer {
 
             assignPermission(rolePermissionRepository, userRole, readSecureData);
 
-            // ---------- USER → ROLE ----------
+            // UserRole
             assignRole(userRoleRepository, admin, adminRole);
             assignRole(userRoleRepository, user, userRole);
         };
     }
 
-    // ===== helper methods =====
+    // HelperMethos
 
     private Permission createPermission(PermissionRepository repo, String name) {
         return repo.findByName(name)
